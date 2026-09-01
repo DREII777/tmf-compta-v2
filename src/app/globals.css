@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════════
+   TMF Compta — système de design
+   Fond blanc. Navy = ancrage de marque. 9 teintes de catégorie
+   pour donner de la couleur sans tomber dans le tout-bleu.
+   ══════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* — Marque (repris du logo et du site historique) — */
+  --color-brand:      #002859;
+  --color-brand-2:    #193175;
+  --color-brand-3:    #2B4D75;
+  --color-brand-tint: #EAF1FC;
+
+  /* — Accent chaud : crédibilité, badges, chiffres — */
+  --color-accent:      #A05B12;
+  --color-accent-2:    #C2760F;
+  --color-accent-tint: #FDF4E4;
+
+  /* — Neutres (légère dérive bleutée, choisie et non héritée) — */
+  --color-ink:    #101A26;
+  --color-ink-2:  #3B4C60;
+  --color-ink-3:  #5C6E80;   /* assombri : 4,98:1 sur --color-soft (4,42 auparavant) */
+  --color-line:   #E3E8EF;
+  --color-line-2: #CBD4E0;
+  --color-paper:  #FFFFFF;
+  --color-soft:   #F7F9FC;
+  --color-soft-2: #EEF3F9;
+
+  /* — Sémantiques — */
+  --color-ok:   #157347;
+  --color-warn: #9A6700;
+  --color-bad:  #B4232A;
+
+  /* — 9 teintes de catégorie : une par service — */
+  --color-c1:  #B45309;  --color-c1-bg:  #FEF3E2;   /* ambre    — comptabilité */
+  --color-c2:  #047857;  --color-c2-bg:  #E7F6F0;   /* émeraude — fiscalité    */
+  --color-c3:  #6D28D9;  --color-c3-bg:  #F1EBFD;   /* violet   — création     */
+  --color-c4:  #BE185D;  --color-c4-bg:  #FDECF3;   /* rose     — gestion      */
+  --color-c5:  #0369A1;  --color-c5-2: #075985;  --color-c5-bg:  #E4F2FB;   /* azur     — social       */
+  --color-c6:  #0F766E;  --color-c6-bg:  #E3F4F2;   /* sarcelle — personne     */
+  --color-c7:  #C2410C;  --color-c7-bg:  #FDEDE5;   /* orange   — missions     */
+  --color-c8:  #4338CA;  --color-c8-bg:  #EBEBFC;   /* indigo   — Peppol       */
+  --color-c9:  #A21CAF;  --color-c9-bg:  #FBEAFB;   /* fuchsia  — contrôles    */
+
+  /* — Typo — */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* — Rayons — */
+  --radius-sm: 6px;
+  --radius-DEFAULT: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  /* — Ombres — */
+  --shadow-xs: 0 1px 2px rgb(16 26 38 / 0.05);
+  --shadow-sm: 0 1px 3px rgb(16 26 38 / 0.07), 0 1px 2px rgb(16 26 38 / 0.04);
+  --shadow-lg: 0 10px 28px -10px rgb(16 26 38 / 0.16), 0 2px 8px rgb(16 26 38 / 0.05);
+  --shadow-xl: 0 24px 60px -22px rgb(16 26 38 / 0.28), 0 4px 14px rgb(16 26 38 / 0.06);
+
+  /* — Conteneur — */
+  --container-site: 1240px;
+
+  /* — Courbe d'animation — */
+  --ease-out-soft: cubic-bezier(0.22, 0.68, 0.35, 1);
+}
+
+/* ───────────────────────────────────────────────────────────────────
+   Thème unique : clair.
+   Le site est volontairement mono-thème — fond blanc, navy en accent de
+   marque. Aucun bloc `prefers-color-scheme: dark` : un visiteur dont le
+   système est en sombre voit la même identité que les autres.
+   Le `color-scheme: only light` empêche le navigateur d'inverser
+   automatiquement les contrôles de formulaire.
+   ─────────────────────────────────────────────────────────────────── */
+:root { color-scheme: only light; }
+
+/* ─────────── Base ─────────── */
+@layer base {
+  * { box-sizing: border-box; }
+
+  /* PAS de `scroll-behavior: smooth` sur <html>.
+     Au changement de page, Next remet le défilement en haut ; avec un
+     défilement doux, cette remise devient une glissade animée de ~1,5 s qui
+     traverse toute la page quittée. Elle déclenche au passage chaque
+     IntersectionObserver de la page d'arrivée : le visiteur arrive sur une
+     page dont toutes les révélations sont déjà consommées — et se pose à
+     ~69 px du haut, pas à 0.
+     Les ancres du site — le lien d'évitement `#main` et les liens du
+     récapitulatif d'erreurs du formulaire, `#field-*` — gagnent à un saut
+     immédiat : un utilisateur au clavier veut y être, pas y être emmené.
+     Rien à ajouter côté JS : Next remet déjà le défilement à 0 sur un lien,
+     et restaure la position au retour arrière. */
+
+  /* L'en-tête est collant : sans cette réserve, la cible d'une ancre se
+     retrouve sous lui. `#main` porte aussi `tabIndex={-1}` côté JSX — sans
+     quoi le lien d'évitement déplacerait la vue sans déplacer le focus
+     clavier, et ne ferait donc rien pour qui navigue au clavier. */
+  #main { scroll-margin-top: 5rem; }
+  #main:focus { outline: none; }
+  /* Récapitulatif d'erreurs du formulaire : sans réserve, le champ visé se
+     posait à y=0, entièrement sous les 69 px d'en-tête, et son libellé à
+     -26 px, hors écran. 7rem amène le libellé ET le champ dans le champ de
+     vision. Sélecteur volontairement étroit : `scroll-padding-top` sur
+     <html> casserait le test de position de Next et ferait réapparaître
+     l'atterrissage à 69 px au changement de page. */
+  [id^='field-'] { scroll-margin-top: 7rem; }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16.5px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+    text-wrap: balance;
+    font-variation-settings: "opsz" 60, "SOFT" 0, "WONK" 0;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 5px;
+  }
+
+  ::selection { background: var(--color-brand-tint); color: var(--color-brand); }
+
+  img, svg, video { display: block; max-width: 100%; }
+
+  /* Les tableaux et blocs larges défilent dans leur propre conteneur */
+  .scroll-x { overflow-x: auto; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .wonk { font-variation-settings: "opsz" 100, "SOFT" 0, "WONK" 1; }
+  .opsz-lg { font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .balance { text-wrap: balance; }
+
+  /* Révélation au défilement — logique volontairement inversée.
+     Le contenu est VISIBLE par défaut ; c'est le JS qui l'escamote en
+     posant `.rv-armed` au montage, puis le révèle avec `.in`. Sans
+     JavaScript, rien ne disparaît : `.rv` seule n'a aucune règle.
+
+     La transition n'est déclarée QUE sur l'état d'arrivée : l'escamotage
+     est instantané, seule la révélation s'anime. Un bloc déjà à l'écran au
+     montage ne descend donc plus avant de remonter.
+
+     Le fondu est délibéré. Il avait été retiré au motif qu'un texte en
+     cours de transition ferait échouer l'audit de contraste : c'est faux,
+     axe-core lit un instantané de style calculé après stabilisation et
+     écarte un élément à `opacity: 0` (résultat « incomplete », non compté)
+     au lieu de le mettre en échec. PrivacyNotice.tsx anime déjà l'opacité
+     sur du texte, à 100/100. NE PAS le re-supprimer. */
+  .rv-armed { opacity: 0; transform: translateY(16px); }
+  .rv-armed.in {
+    opacity: 1;
+    transform: none;
+    transition: opacity .5s var(--ease-out-soft), transform .6s var(--ease-out-soft);
+  }
+  /* Le clavier peut atteindre un bloc pas encore révélé : on le montre
+     aussitôt plutôt que de laisser le focus sur de l'invisible.
+     Doit rester APRÈS `.in` — même spécificité, le dernier l'emporte. */
+  .rv-armed:focus-within { opacity: 1; transform: none; transition: none; }
+
+  /* Ouverture animée des <details> — enrichissement progressif : les
+     navigateurs qui ignorent ces propriétés gardent l'ouverture instantanée. */
+  @supports (interpolate-size: allow-keywords) {
+    :root { interpolate-size: allow-keywords; }
+    details::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition: block-size .25s var(--ease-out-soft), content-visibility .25s allow-discrete;
+    }
+    details[open]::details-content { block-size: auto; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    /* `animate-spin` boucle à l'infini : sans cette ligne, une durée de
+       0,001 ms le fait scintiller au lieu de l'arrêter — l'inverse exact
+       de ce que l'utilisateur demande, et pendant l'envoi du formulaire. */
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001ms !important;
+    /* Écrase les délais posés en style inline par Reveal.tsx. */
+    transition-delay: 0s !important;
+  }
+  /* Filet complet, indépendant du garde JS de Reveal.tsx : `opacity: 1` est
+     indispensable depuis que la révélation joue sur l'opacité — sans lui, un
+     visiteur qui active la réduction de mouvement en cours de session reste
+     sur du contenu invisible. */
+  .rv, .rv-armed, .rv-armed.in { opacity: 1 !important; transform: none !important; }
+}
