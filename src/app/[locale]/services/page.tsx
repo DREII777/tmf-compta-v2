@@ -1,3 +1,4 @@
+import { Accent } from '@/components/Accent'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -126,7 +127,7 @@ export default async function ServicesIndexPage({ params }: ServicesIndexPagePro
                 <ServiceCard
                   service={service}
                   locale={locale}
-                  ctaLabel={ui.common.discoverService}
+                  ctaLabel={ui.common.details}
                   className="h-full"
                 />
               </Reveal>
@@ -137,12 +138,12 @@ export default async function ServicesIndexPage({ params }: ServicesIndexPagePro
 
       <Section>
         <Container>
-          <h2 className="balance max-w-2xl font-display text-3xl wonk text-ink md:text-5xl">{ui.home.phasesTitle}</h2>
+          <h2 className="balance max-w-2xl font-display text-3xl wonk text-ink md:text-5xl"><Accent text={ui.home.phasesTitle} /></h2>
           <div className="mt-10 grid gap-6 md:grid-cols-3">
             {PHASES.map((phase) => {
               const relatedServices = resolveServices(phase.serviceIds)
               return (
-                <div key={phase.titleKey} className="flex h-full flex-col gap-4 rounded-xl border border-line bg-paper p-6 shadow-xs">
+                <div key={phase.titleKey} className="flex h-full flex-col gap-4 rounded-xl bg-paper p-6 shadow-card">
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-brand-tint text-brand">
                     <Icon name={phase.icon} size={22} />
                   </span>

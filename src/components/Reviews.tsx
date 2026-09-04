@@ -8,9 +8,9 @@ interface ReviewsProps {
 
 export function Reviews({ items, className }: ReviewsProps) {
   return (
-    <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${className ?? ''}`}>
+    <div className={`columns-1 gap-6 sm:columns-2 lg:columns-3 ${className ?? ''}`}>
       {items.map((review) => (
-        <figure key={review.id} className="flex h-full flex-col gap-4 rounded-lg border border-line bg-paper p-6 shadow-xs">
+        <figure key={review.id} className="mb-6 flex break-inside-avoid flex-col gap-4 rounded-xl bg-paper p-6 shadow-card">
           <div className="flex items-center gap-2">
             <div className="flex gap-0.5 text-accent" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, idx) => (

@@ -4,12 +4,11 @@ import type { ReactNode } from 'react'
 import { Footer } from '@/components/Footer'
 import { PrivacyNotice } from '@/components/PrivacyNotice'
 import { Header } from '@/components/Header'
-import { HtmlShell } from '@/components/HtmlShell'
+import { LangSync } from '@/components/LangSync'
 import { JsonLd } from '@/components/JsonLd'
 import { SkipLink } from '@/components/SkipLink'
 import { abs, isLocale, LOCALES, path, type Locale } from '@/lib/i18n'
 import { AREA_SERVED, SITE } from '@/lib/site'
-import '../globals.css'
 
 const OG_LOCALE: Record<Locale, string> = { fr: 'fr_BE', ro: 'ro_RO' }
 
@@ -100,14 +99,24 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     sameAs: [SITE.social.facebook],
   }
 
+  /*
+   * `<html>`/`<body>` viennent du layout racine (app/layout.tsx), qui ne
+   * connaît pas la locale et sert `lang="fr"`. Deux filets ici :
+   * – `lang={locale}` sur le conteneur : tout le contenu est correctement
+   *   étiqueté dès le HTML servi, pour les lecteurs d'écran (WCAG 3.1.2) ;
+   * – `LangSync` aligne `<html lang>` à l'hydratation.
+   * Rendre un second `<html>` ici provoquait une erreur d'hydratation sur
+   * chaque page roumaine.
+   */
   return (
-    <HtmlShell lang={locale}>
+    <div lang={locale} className="contents">
+      <LangSync locale={locale} />
       <SkipLink locale={locale} />
       <Header locale={locale} />
       <main id="main" tabIndex={-1}>{children}</main>
       <Footer locale={locale} />
       <PrivacyNotice locale={locale} />
       <JsonLd data={jsonLd} />
-    </HtmlShell>
+    </div>
   )
 }

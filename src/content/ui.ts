@@ -36,6 +36,8 @@ export interface UiDictionary {
   }
 
   header: {
+    /** Pastille à côté du logo : le métier, en trois mots. */
+    badge: string
     phoneLabel: string
     cta: string
     menuOpen: string
@@ -65,6 +67,9 @@ export interface UiDictionary {
     heroTrustPoints: [string, string, string]
     heroFloatingSince: string
     heroFloatingPeppol: string
+    /** Bandeau défilant sous le hero : intitulé + pastilles (nos prestations). */
+    marqueeTitle: string
+    marqueeItems: string[]
     stats: [
       { value: string; label: string },
       { value: string; label: string },
@@ -92,8 +97,13 @@ export interface UiDictionary {
     whyUsTitle: string
     whyUsIntro: string
     whyUsPoints: [string, string, string, string, string, string]
+    servicesEyebrow: string
     servicesTitle: string
     servicesSubtitle: string
+    /** Bande d'appel sous la grille : phrase, accroche, bouton `tel:`. */
+    callBandLine1: string
+    callBandLine2: string
+    callBandButton: string
     reviewsTitle: string
     reviewsSubtitle: string
     timelineTitle: string
@@ -214,6 +224,8 @@ export interface UiDictionary {
   common: {
     readMore: string
     discoverService: string
+    /** Bouton court des cartes de service, à côté du tarif. */
+    details: string
     viewAllServices: string
     callUs: string
     emailUs: string
@@ -250,6 +262,7 @@ export const UI: Record<Locale, UiDictionary> = {
     },
 
     header: {
+      badge: 'Expertise comptable & fiscale',
       phoneLabel: 'Appelez-nous',
       cta: 'Prendre rendez-vous',
       menuOpen: 'Ouvrir le menu',
@@ -271,7 +284,7 @@ export const UI: Record<Locale, UiDictionary> = {
 
     home: {
       heroEyebrow: 'Cabinet d’expertise comptable et fiscale',
-      heroTitle: 'Comptable-Fiscaliste, Situé à Zaventem',
+      heroTitle: 'Comptable-*Fiscaliste*, Situé à *Zaventem*',
       heroAccroche:
         "Optimisez la santé financière de votre entreprise avec l'expertise d'un cabinet d'expert comptable de confiance.",
       heroCtaPrimary: 'Prendre rendez-vous',
@@ -284,13 +297,26 @@ export const UI: Record<Locale, UiDictionary> = {
       ],
       heroFloatingSince: 'Depuis 2014',
       heroFloatingPeppol: 'Conformes Peppol 2026',
+      marqueeTitle: 'Ce que nous gérons pour vous, au quotidien',
+      marqueeItems: [
+        'Déclarations TVA',
+        'Comptes annuels',
+        'Déclarations ISOC / IPP',
+        'Création de SRL',
+        'Facturation Peppol',
+        'Contrôles fiscaux',
+        'Situations comptables',
+        'Optimisation fiscale',
+        'Obligations sociales',
+        'Rapprochements bancaires',
+      ],
       stats: [
         { value: '2014', label: 'Sur le marché depuis' },
         { value: 'ITAA', label: 'Expert-comptable agréé' },
         { value: '24 h', label: 'Délai de réponse moyen' },
         { value: 'FR / RO', label: 'Accompagnement bilingue' },
       ],
-      methodTitle: 'Comment ça se passe',
+      methodTitle: 'Comment *ça se passe*',
       methodSubtitle: 'Quatre étapes simples, du premier contact au suivi de vos échéances.',
       methodSteps: [
         {
@@ -312,7 +338,7 @@ export const UI: Record<Locale, UiDictionary> = {
       ],
       methodStepOf: 'Étape {n} sur {total}',
       methodProgress: 'Les étapes de notre méthode',
-      phasesTitle: 'À chaque phase de votre entreprise',
+      phasesTitle: 'À chaque phase de votre *entreprise*',
       phaseCreation: 'Création',
       phaseGestion: 'Gestion',
       phaseExpansion: 'Expansion',
@@ -322,7 +348,7 @@ export const UI: Record<Locale, UiDictionary> = {
       missionTitle: 'Notre mission',
       missionText:
         "Chez TMF Compta, notre mission est votre succès financier. Nous vous accompagnons avec expertise et solutions personnalisées pour optimiser votre gestion, vos décisions stratégiques et votre croissance. Faites confiance à notre équipe expérimentée pour atteindre vos objectifs entrepreneuriaux.",
-      whyUsTitle: 'Pourquoi nous choisir ?',
+      whyUsTitle: 'Pourquoi *nous* choisir ?',
       whyUsIntro: 'Nous offrons des services sur mesure pour répondre efficacement à vos besoins spécifiques.',
       whyUsPoints: [
         'Gestion de comptabilité et déclarations TVA',
@@ -332,17 +358,21 @@ export const UI: Record<Locale, UiDictionary> = {
         'Conseils en fiscalité et optimisation fiscale',
         'Assistance et défense lors de contrôles fiscaux',
       ],
-      servicesTitle: 'Un service en 360°',
+      servicesEyebrow: 'Ce que nous faisons',
+      callBandLine1: 'Une question sur votre TVA, votre statut ou un changement de comptable ?',
+      callBandLine2: 'Un premier échange par téléphone, sans engagement.',
+      callBandButton: 'Appelez-nous maintenant',
+      servicesTitle: 'Un service en *360°*',
       servicesSubtitle:
         "Découvrez l'ensemble de nos services, votre passerelle vers une gestion comptable et financière optimale.",
-      reviewsTitle: 'Ils nous font confiance',
+      reviewsTitle: 'Ils nous font *confiance*',
       reviewsSubtitle: 'Les avis de nos clients, tels que publiés sur Google.',
       timelineTitle: 'Notre histoire',
-      faqTeaserTitle: 'Vous avez des questions ?',
+      faqTeaserTitle: 'Vous avez des *questions* ?',
       faqTeaserLink: 'Consulter la FAQ',
-      ctaBandTitle: 'Déléguez votre comptabilité',
+      ctaBandTitle: 'Déléguez votre *comptabilité*',
       ctaBandText:
-        'Laissez-nous votre adresse email pour être recontacté rapidement. Ensemble, trouvons la solution comptable la mieux adaptée à votre activité.',
+        'Un premier échange suffit pour y voir clair. Ensemble, trouvons la solution comptable la mieux adaptée à votre activité.',
       ctaBandButton: 'Envoyer',
       metaTitle: 'Comptable à Zaventem – Expert-comptable ITAA, TMF Compta',
       metaDescription:
@@ -484,6 +514,7 @@ export const UI: Record<Locale, UiDictionary> = {
     common: {
       readMore: 'En savoir plus',
       discoverService: 'Découvrir ce service',
+      details: 'Détails',
       viewAllServices: 'Voir tous les services',
       callUs: 'Nous appeler',
       emailUs: 'Nous écrire',
@@ -519,6 +550,7 @@ export const UI: Record<Locale, UiDictionary> = {
     },
 
     header: {
+      badge: 'Contabilitate și fiscalitate',
       phoneLabel: 'Sunați-ne',
       cta: 'Programează o întâlnire',
       menuOpen: 'Deschide meniul',
@@ -540,7 +572,7 @@ export const UI: Record<Locale, UiDictionary> = {
 
     home: {
       heroEyebrow: 'Cabinet de expertiză contabilă și fiscală',
-      heroTitle: 'Contabil-Fiscalist, Localizat în Zaventem',
+      heroTitle: 'Contabil-*Fiscalist*, Localizat în *Zaventem*',
       heroAccroche:
         'Optimizați sănătatea financiară a afacerii dumneavoastră cu expertiza unui cabinet de expertiză contabilă de încredere.',
       heroCtaPrimary: 'Programează o întâlnire',
@@ -553,13 +585,26 @@ export const UI: Record<Locale, UiDictionary> = {
       ],
       heroFloatingSince: 'Din 2014',
       heroFloatingPeppol: 'Conformi Peppol 2026',
+      marqueeTitle: 'Ce gestionăm pentru dumneavoastră, zi de zi',
+      marqueeItems: [
+        'Declarații TVA',
+        'Conturi anuale',
+        'Declarații ISOC / IPP',
+        'Înființare SRL',
+        'Facturare Peppol',
+        'Controale fiscale',
+        'Situații contabile',
+        'Optimizare fiscală',
+        'Obligații sociale',
+        'Reconcilieri bancare',
+      ],
       stats: [
         { value: '2014', label: 'Pe piață din' },
         { value: 'ITAA', label: 'Expert-contabil autorizat' },
         { value: '24 h', label: 'Timp mediu de răspuns' },
         { value: 'FR / RO', label: 'Asistență bilingvă' },
       ],
-      methodTitle: 'Cum decurge colaborarea',
+      methodTitle: 'Cum decurge *colaborarea*',
       methodSubtitle: 'Patru etape simple, de la primul contact până la urmărirea termenelor dumneavoastră.',
       methodSteps: [
         {
@@ -581,7 +626,7 @@ export const UI: Record<Locale, UiDictionary> = {
       ],
       methodStepOf: 'Etapa {n} din {total}',
       methodProgress: 'Etapele metodei noastre',
-      phasesTitle: 'La fiecare etapă a afacerii dumneavoastră',
+      phasesTitle: 'La fiecare etapă a *afacerii* dumneavoastră',
       phaseCreation: 'Înființare',
       phaseGestion: 'Administrare',
       phaseExpansion: 'Extindere',
@@ -591,7 +636,7 @@ export const UI: Record<Locale, UiDictionary> = {
       missionTitle: 'Misiunea noastră',
       missionText:
         'La TMF Compta, misiunea noastră este succesul dumneavoastră financiar. Vă însoțim cu expertiză și soluții personalizate pentru a optimiza gestionarea, deciziile strategice și creșterea afacerii dumneavoastră. Aveți încredere în echipa noastră experimentată pentru a vă atinge obiectivele antreprenoriale.',
-      whyUsTitle: 'De ce să ne alegeți?',
+      whyUsTitle: 'De ce să *ne* alegeți?',
       whyUsIntro: 'Oferim servicii personalizate pentru a răspunde eficient nevoilor dumneavoastră specifice.',
       whyUsPoints: [
         'Gestiunea contabilității și declarațiile TVA',
@@ -601,17 +646,21 @@ export const UI: Record<Locale, UiDictionary> = {
         'Consultanță fiscală și optimizare fiscală',
         'Asistență și reprezentare în timpul controalelor fiscale',
       ],
-      servicesTitle: 'Un serviciu complet de 360°',
+      servicesEyebrow: 'Ce oferim?',
+      callBandLine1: 'O întrebare despre TVA, statutul dumneavoastră sau schimbarea contabilului?',
+      callBandLine2: 'Un prim schimb telefonic, fără niciun angajament.',
+      callBandButton: 'Sunați-ne acum',
+      servicesTitle: 'Un serviciu complet de *360°*',
       servicesSubtitle:
         'Descoperiți toate serviciile noastre, poarta dumneavoastră către o gestionare contabilă și financiară optimă.',
-      reviewsTitle: 'Ne acordă încredere',
+      reviewsTitle: 'Ne acordă *încredere*',
       reviewsSubtitle: 'Recenziile clienților noștri, așa cum apar pe Google.',
       timelineTitle: 'Istoria noastră',
-      faqTeaserTitle: 'Aveți întrebări?',
+      faqTeaserTitle: 'Aveți *întrebări*?',
       faqTeaserLink: 'Consultați întrebările frecvente',
-      ctaBandTitle: 'Delegați contabilitatea',
+      ctaBandTitle: 'Delegați *contabilitatea*',
       ctaBandText:
-        'Lăsați-ne adresa dumneavoastră de email pentru a fi contactat rapid. Împreună, găsim soluția contabilă cea mai potrivită pentru activitatea dumneavoastră.',
+        'Un prim schimb este de ajuns pentru a vedea clar. Împreună, găsim soluția contabilă cea mai potrivită activității dumneavoastră.',
       ctaBandButton: 'Trimite',
       metaTitle: 'Contabil în Zaventem – Expert-contabil ITAA, TMF Compta',
       metaDescription:
@@ -751,6 +800,7 @@ export const UI: Record<Locale, UiDictionary> = {
     common: {
       readMore: 'Aflați mai multe',
       discoverService: 'Descoperă acest serviciu',
+      details: 'Detalii',
       viewAllServices: 'Vezi toate serviciile',
       callUs: 'Sună-ne',
       emailUs: 'Scrie-ne',

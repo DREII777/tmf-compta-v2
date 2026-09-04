@@ -132,7 +132,7 @@ export default async function ContactPage({ params }: ContactPageProps) {
         <Container>
           <div className="grid grid-cols-1 gap-10 lg:grid-cols-5 lg:gap-12">
             <Reveal className="lg:col-span-3">
-              <div className="rounded-xl border border-line bg-paper p-6 shadow-sm md:p-8">
+              <div className="rounded-xl bg-paper p-6 shadow-card md:p-8">
                 <h2 className="font-display text-2xl wonk text-ink">{contact.formTitle}</h2>
                 <ContactForm locale={locale} className="mt-6" />
               </div>

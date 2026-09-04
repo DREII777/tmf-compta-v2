@@ -17,6 +17,7 @@
   --color-accent:      #A05B12;
   --color-accent-2:    #C2760F;
   --color-accent-tint: #FDF4E4;
+  --color-accent-deep: #874B0E;   /* survol du bouton d'appel : reste ≥ 4,5:1 avec du blanc */
 
   /* — Neutres (légère dérive bleutée, choisie et non héritée) — */
   --color-ink:    #101A26;
@@ -27,6 +28,13 @@
   --color-paper:  #FFFFFF;
   --color-soft:   #F7F9FC;
   --color-soft-2: #EEF3F9;
+
+  /* — Halo du hero : ciel clair au centre, fondu vers le fond — */
+  --color-glow:   #BFE3FB;
+
+  /* — Menthe : bouton doux, pastille d'intro (texte encre dessus) — */
+  --color-mint:   #CDF1E2;
+  --color-mint-2: #B9E9D5;
 
   /* — Sémantiques — */
   --color-ok:   #157347;
@@ -59,6 +67,9 @@
   --shadow-sm: 0 1px 3px rgb(16 26 38 / 0.07), 0 1px 2px rgb(16 26 38 / 0.04);
   --shadow-lg: 0 10px 28px -10px rgb(16 26 38 / 0.16), 0 2px 8px rgb(16 26 38 / 0.05);
   --shadow-xl: 0 24px 60px -22px rgb(16 26 38 / 0.28), 0 4px 14px rgb(16 26 38 / 0.06);
+  /* Carte sans bordure : une ombre diffuse suffit à la détacher du fond. */
+  --shadow-card: 0 1px 2px rgb(16 26 38 / 0.04), 0 10px 30px -12px rgb(16 26 38 / 0.14);
+  --shadow-card-hover: 0 2px 4px rgb(16 26 38 / 0.05), 0 22px 44px -16px rgb(16 26 38 / 0.22);
 
   /* — Conteneur — */
   --container-site: 1240px;
@@ -142,6 +153,73 @@
 
 @layer utilities {
   .font-display { font-family: var(--font-display); }
+
+  /* Halo radial du hero : ciel au centre, transparent vers les bords —
+     dessiné sur toute la section, sans élément décoratif supplémentaire. */
+  .hero-glow { background-image: radial-gradient(var(--color-glow), transparent 72%); }
+
+  /* Bouton d'appel : pulsation douce + onde qui s'éloigne, et combiné qui
+     « sonne ». Coupé par la règle prefers-reduced-motion plus bas (durée
+     quasi nulle, une seule itération). */
+  @keyframes call-pulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0 rgb(160 91 18 / 0.40); }
+    50%      { transform: scale(1.03); box-shadow: 0 0 0 14px rgb(160 91 18 / 0); }
+  }
+  @keyframes call-ring {
+    0%, 55%, 100% { transform: rotate(0); }
+    10% { transform: rotate(-16deg); }
+    20% { transform: rotate(13deg); }
+    30% { transform: rotate(-11deg); }
+    40% { transform: rotate(8deg); }
+  }
+  /* Trame de points (sur fond clair / sur navy), fondue vers les bords */
+  .dot-grid {
+    background-image: radial-gradient(var(--color-line-2) 1.1px, transparent 1.2px);
+    background-size: 24px 24px;
+    opacity: 0.75;
+    -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 40%, #000 15%, transparent 75%);
+    mask-image: radial-gradient(ellipse 75% 80% at 50% 40%, #000 15%, transparent 75%);
+  }
+  .dot-grid-light {
+    background-image: radial-gradient(rgb(255 255 255 / 0.22) 1.1px, transparent 1.2px);
+    background-size: 24px 24px;
+    -webkit-mask-image: linear-gradient(to bottom, #000, transparent);
+    mask-image: linear-gradient(to bottom, #000, transparent);
+  }
+
+  /* Entrée en cascade du hero (délai posé en style inline) */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .rise { animation: rise 0.7s var(--ease-out-soft) both; }
+  /* Variante sans fondu pour le titre et l'accroche : un bloc de texte à
+     opacité 0 n'est pas compté comme peint, ce qui repoussait le LCP mobile
+     à plus de 3 s. Le glissement seul garde l'effet d'entrée. */
+  @keyframes rise-solid {
+    from { transform: translateY(18px); }
+    to   { transform: none; }
+  }
+  .rise-solid { animation: rise-solid 0.7s var(--ease-out-soft) both; }
+
+  /* Flottement lent de l'illustration */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-9px); }
+  }
+  .float { animation: float 6s ease-in-out infinite; }
+
+  /* Bandeau défilant : la liste est doublée, -50 % boucle sans raccord */
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  .marquee { animation: marquee 42s linear infinite; }
+  .marquee:hover { animation-play-state: paused; }
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .call-pulse { animation: call-pulse 1.8s ease-in-out infinite; }
+  .call-ring  { animation: call-ring 2.6s ease-in-out infinite; transform-origin: 50% 60%; }
   .wonk { font-variation-settings: "opsz" 100, "SOFT" 0, "WONK" 1; }
   .opsz-lg { font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1; }
   .tnum { font-variant-numeric: tabular-nums; }

@@ -56,6 +56,7 @@ function Logo() {
 export function Header({ locale, altPath }: HeaderProps) {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const panelId = useId()
   const toggleRef = useRef<HTMLButtonElement>(null)
   const ui = UI[locale]
@@ -80,6 +81,30 @@ export function Header({ locale, altPath }: HeaderProps) {
     document.addEventListener('keydown', onKeyDown)
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [open])
+
+  /**
+   * En-tête dynamique : collé au bord en haut de page, il se détache en
+   * barre flottante arrondie, plus compacte, dès que l'on défile. La mise à
+   * jour passe par requestAnimationFrame : un seul rendu par image, et le
+   * premier appel (position restaurée au chargement) reste hors du corps de
+   * l'effet.
+   */
+  useEffect(() => {
+    let raf = 0
+    const update = () => {
+      raf = 0
+      setScrolled(window.scrollY > 24)
+    }
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update)
+    }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [])
 
   const homeHref = path(locale, 'home')
 
@@ -109,7 +134,7 @@ export function Header({ locale, altPath }: HeaderProps) {
               onClick={variant === 'mobile' ? focusMainOnMobileNav : undefined}
               className={
                 variant === 'desktop'
-                  ? `inline-flex min-h-11 items-center rounded px-3 text-[0.95rem] font-medium transition-colors duration-200 ease-out-soft ${isActive ? 'text-brand' : 'text-ink-2 hover:text-brand'}`
+                  ? `inline-flex min-h-11 items-center whitespace-nowrap rounded px-3 text-[0.95rem] font-medium transition-colors duration-200 ease-out-soft ${isActive ? 'text-brand' : 'text-ink-2 hover:text-brand'}`
                   : `flex min-h-11 items-center rounded px-2 text-base font-medium transition-colors duration-200 ease-out-soft ${isActive ? 'text-brand' : 'text-ink-2 hover:text-brand'}`
               }
             >
@@ -121,12 +146,33 @@ export function Header({ locale, altPath }: HeaderProps) {
     </ul>
   )
 
+  // Le retrait de la barre flottante est un padding sur <header>, pas une
+  // marge sur l'enfant : une marge fusionnerait avec celle du conteneur
+  // collant et la barre resterait collée au bord.
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-paper">
-      <div className="mx-auto flex max-w-site items-center justify-between gap-4 px-6 py-3">
-        <Link href={homeHref} aria-label={ui.nav.home} className="flex shrink-0 items-center rounded">
-          <Logo />
-        </Link>
+    <header className={`sticky top-0 z-40 transition-[padding] duration-500 ease-out-soft ${scrolled ? 'px-3 pt-3' : ''}`}>
+      <div
+        className={`mx-auto backdrop-blur-md transition-[border-radius,box-shadow,background-color,border-color,max-width] duration-500 ease-out-soft ${
+          scrolled
+            ? 'max-w-[calc(var(--container-site)+2rem)] rounded-2xl border border-line/80 bg-paper/95 shadow-xl'
+            : 'max-w-none border-b border-line/70 bg-paper/80'
+        }`}
+      >
+      <div
+        className={`mx-auto flex max-w-site items-center justify-between gap-4 px-6 transition-[padding] duration-500 ease-out-soft ${scrolled ? 'py-1.5' : 'py-3'}`}
+      >
+        <div className="flex shrink-0 items-center gap-3">
+          <Link
+            href={homeHref}
+            aria-label={ui.nav.home}
+            className={`flex shrink-0 origin-left items-center rounded transition-transform duration-500 ease-out-soft ${scrolled ? 'scale-90' : 'scale-100'}`}
+          >
+            <Logo />
+          </Link>
+          <span className="hidden whitespace-nowrap rounded-lg bg-brand-tint px-3 py-1 text-xs font-semibold text-brand 2xl:inline-flex">
+            {ui.header.badge}
+          </span>
+        </div>
 
         <nav aria-label={NAV_ARIA_LABEL[locale]} className="hidden lg:block">
           {navLinks('desktop')}
@@ -136,13 +182,13 @@ export function Header({ locale, altPath }: HeaderProps) {
           <a
             href={`tel:${SITE.phoneRaw}`}
             aria-label={`${ui.header.phoneLabel} : ${SITE.phone}`}
-            className="inline-flex min-h-11 items-center gap-2 rounded px-2 text-sm font-medium text-ink-2 transition-colors duration-200 ease-out-soft hover:text-brand"
+            className="hidden min-h-11 items-center gap-2 whitespace-nowrap rounded px-2 text-sm font-semibold text-c2 transition-colors duration-200 ease-out-soft hover:underline xl:inline-flex"
           >
             <Icon name="phone" size={18} />
             {SITE.phone}
           </a>
           <LangSwitch locale={locale} altPath={altPath} />
-          <Button href={path(locale, 'contact')} size="sm">
+          <Button href={path(locale, 'contact')} size="sm" className="whitespace-nowrap">
             {ui.header.cta}
           </Button>
         </div>
@@ -164,7 +210,7 @@ export function Header({ locale, altPath }: HeaderProps) {
         id={panelId}
         aria-hidden={!open}
         inert={!open}
-        className={`grid border-t bg-paper transition-[grid-template-rows,border-color] duration-200 ease-out-soft lg:hidden ${open ? 'grid-rows-[1fr] border-line' : 'grid-rows-[0fr] border-transparent'}`}
+        className={`grid border-t bg-paper transition-[grid-template-rows,border-color] duration-200 ease-out-soft lg:hidden ${open ? 'grid-rows-[1fr] border-line' : 'grid-rows-[0fr] border-transparent'} ${scrolled ? 'rounded-b-2xl' : ''}`}
       >
         <div className="min-h-0 overflow-hidden">
           <div className="px-6 py-4">
@@ -173,7 +219,7 @@ export function Header({ locale, altPath }: HeaderProps) {
               <a
                 href={`tel:${SITE.phoneRaw}`}
                 aria-label={`${ui.header.phoneLabel} : ${SITE.phone}`}
-                className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-ink-2 transition-colors duration-200 ease-out-soft hover:text-brand"
+                className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-c2 transition-colors duration-200 ease-out-soft hover:underline"
               >
                 <Icon name="phone" size={18} />
                 {SITE.phone}
@@ -185,6 +231,7 @@ export function Header({ locale, altPath }: HeaderProps) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </header>
   )

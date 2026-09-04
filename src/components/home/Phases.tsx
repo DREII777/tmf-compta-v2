@@ -1,3 +1,4 @@
+import { Accent } from '../Accent'
 import Link from 'next/link'
 import { SERVICES } from '@/content/services'
 import { UI } from '@/content/ui'
@@ -34,7 +35,7 @@ export function Phases({ locale }: PhasesProps) {
   return (
     <section className="bg-paper py-16 md:py-24">
       <Container>
-        <h2 className="max-w-2xl font-display text-3xl wonk text-ink md:text-5xl">{ui.phasesTitle}</h2>
+        <h2 className="max-w-2xl font-display text-3xl wonk text-ink md:text-5xl"><Accent text={ui.phasesTitle} /></h2>
 
         <ol className="mt-12 grid gap-6 sm:grid-cols-3">
           {PHASES.map(({ serviceId, Illustration }, index) => {
@@ -44,10 +45,10 @@ export function Phases({ locale }: PhasesProps) {
 
             return (
               <li key={serviceId}>
-                <Reveal>
+                <Reveal delay={index * 110}>
                   <Link
                     href={servicePath(locale, content.slug)}
-                    className="group flex h-full flex-col overflow-hidden rounded-xl border border-line bg-paper shadow-xs transition duration-200 ease-out-soft hover:-translate-y-1 hover:border-line-2 hover:shadow-lg focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand"
+                    className="group flex h-full flex-col overflow-hidden rounded-xl bg-paper shadow-card transition duration-200 ease-out-soft hover:-translate-y-1 hover:shadow-card-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand"
                   >
                     <div className="overflow-hidden">
                       <div className="transition-transform duration-300 ease-out-soft group-hover:scale-105">

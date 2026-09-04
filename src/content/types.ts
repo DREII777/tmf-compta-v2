@@ -73,6 +73,12 @@ export interface ServiceLocaleContent {
   title: string
   /** Résumé d'une phrase pour les cartes et les listes. */
   summary: string
+  /**
+   * Ligne tarif affichée en pied de carte, en texte libre localisé :
+   * « À partir de 250 € / trimestre », ou « Devis gratuit » tant que le
+   * cabinet n'a pas fixé de prix public pour ce service.
+   */
+  price: string
   /** Description longue, en paragraphes distincts (rendus en <p> successifs). */
   description: string[]
   /** Liste de prestations concrètes (5 à 8 puces). */

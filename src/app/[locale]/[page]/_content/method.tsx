@@ -142,7 +142,7 @@ export function MethodPage({ locale }: { locale: Locale }) {
               return (
                 <li key={step.title}>
                   <Reveal>
-                    <article className="flex flex-col gap-5 rounded-xl border border-line bg-paper p-6 shadow-xs md:flex-row md:gap-8 md:p-8">
+                    <article className="flex flex-col gap-5 rounded-xl bg-paper p-6 shadow-card md:flex-row md:gap-8 md:p-8">
                       <div className="flex shrink-0 items-start gap-4 md:w-64">
                         <span className="tnum inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand font-display text-lg wonk text-paper">
                           {index + 1}

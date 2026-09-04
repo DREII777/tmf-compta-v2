@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { CtaBand } from '@/components/CtaBand'
 import { FaqSection } from '@/components/home/FaqSection'
 import { Hero } from '@/components/home/Hero'
+import { Marquee } from '@/components/home/Marquee'
 import { Method } from '@/components/home/Method'
 import { Phases } from '@/components/home/Phases'
 import { RomanianSection } from '@/components/home/RomanianSection'
@@ -68,10 +69,11 @@ export default async function HomePage({ params }: HomePageProps) {
   return (
     <>
       <Hero locale={locale} />
+      <Marquee locale={locale} />
       <StatsBand locale={locale} />
-      <Method locale={locale} />
       <ServicesGrid locale={locale} />
       <Phases locale={locale} />
+      <Method locale={locale} />
       <WhyUs locale={locale} />
       <RomanianSection locale={locale} />
       <ReviewsSection locale={locale} />

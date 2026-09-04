@@ -1,3 +1,4 @@
+import { Accent } from '../Accent'
 import Link from 'next/link'
 import { FAQ } from '@/content/faq'
 import { UI } from '@/content/ui'
@@ -32,8 +33,8 @@ export function FaqSection({ locale }: FaqSectionProps) {
   return (
     <section className="bg-paper py-16 md:py-24">
       <Container>
-        <div className="max-w-3xl">
-          <h2 className="font-display text-3xl wonk text-ink md:text-5xl">{ui.faqTeaserTitle}</h2>
+        <div className="mx-auto max-w-3xl">
+          <h2 className="font-display text-3xl wonk text-ink md:text-5xl"><Accent text={ui.faqTeaserTitle} /></h2>
 
           <Reveal className="mt-10">
             <Faq items={SELECTED_FAQ} locale={locale} />

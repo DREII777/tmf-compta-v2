@@ -263,7 +263,7 @@ export default async function ServiceDetailPage({ params }: ServiceDetailPagePro
           <h2 className="balance max-w-2xl font-display text-3xl wonk text-ink md:text-5xl">{t.method}</h2>
           <ol className="mt-10 grid gap-6 sm:grid-cols-3">
             {steps.map((step, index) => (
-              <li key={step.title} className="flex flex-col gap-3 rounded-xl border border-line bg-paper p-6 shadow-xs">
+              <li key={step.title} className="flex flex-col gap-3 rounded-xl bg-paper p-6 shadow-card">
                 <span className="tnum inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand text-sm font-semibold text-paper">
                   {index + 1}
                 </span>

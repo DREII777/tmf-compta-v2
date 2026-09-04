@@ -16,8 +16,9 @@ export function StatsBand({ locale }: StatsBandProps) {
   const ui = UI[locale].home
 
   return (
-    <section className="bg-brand py-16 md:py-20">
-      <Container>
+    <section className="relative overflow-hidden bg-brand py-16 md:py-20">
+      <div aria-hidden="true" className="dot-grid-light pointer-events-none absolute inset-0" />
+      <Container className="relative">
         <Reveal>
           <ul className="grid grid-cols-2 gap-x-6 gap-y-8 md:grid-cols-4">
             {ui.stats.map((stat, index) => (

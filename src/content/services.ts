@@ -22,6 +22,7 @@ export const SERVICES: Service[] = [
     icon: 'ledger',
     fr: {
       slug: 'tenue-de-comptabilite',
+      price: 'Devis gratuit',
       title: 'Tenue de comptabilité',
       summary:
         "Une comptabilité tenue avec rigueur, de la saisie quotidienne aux états financiers, pour des chiffres fiables à tout moment.",
@@ -44,6 +45,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'tinerea-contabilitatii',
+      price: 'Ofertă gratuită',
       title: 'Ținerea contabilității',
       summary:
         "O contabilitate ținută cu rigurozitate, de la înregistrarea zilnică până la situațiile financiare, pentru cifre pe care vă puteți baza oricând.",
@@ -71,6 +73,7 @@ export const SERVICES: Service[] = [
     icon: 'percent',
     fr: {
       slug: 'conseil-fiscal',
+      price: 'Devis gratuit',
       title: 'Conseil fiscal',
       summary:
         "Une expertise fiscale solide pour optimiser légalement votre charge d'impôt et sécuriser chacune de vos décisions.",
@@ -93,6 +96,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'consultanta-fiscala',
+      price: 'Ofertă gratuită',
       title: 'Consultanță fiscală',
       summary:
         "O expertiză fiscală solidă pentru a vă optimiza legal sarcina fiscală și a securiza fiecare decizie importantă.",
@@ -120,6 +124,7 @@ export const SERVICES: Service[] = [
     icon: 'rocket',
     fr: {
       slug: 'conseil-creation-entreprise',
+      price: 'Devis gratuit',
       title: "Conseil en création d'entreprise",
       summary:
         "Un accompagnement complet, de l'idée à l'immatriculation, pour démarrer votre activité sur des bases solides.",
@@ -142,6 +147,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'infiintare-firma',
+      price: 'Ofertă gratuită',
       title: 'Consultanță în înființarea firmei',
       summary:
         "Un sprijin complet, de la idee până la înmatriculare, pentru a vă porni activitatea pe baze solide.",
@@ -169,6 +175,7 @@ export const SERVICES: Service[] = [
     icon: 'compass',
     fr: {
       slug: 'aide-a-la-gestion',
+      price: 'Devis gratuit',
       title: 'Aide à la gestion',
       summary: "Un partenaire de gestion au quotidien, pour transformer vos chiffres en décisions concrètes.",
       description: [
@@ -190,6 +197,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'asistenta-in-gestiune',
+      price: 'Ofertă gratuită',
       title: 'Asistență în gestiune',
       summary: "Un partener de gestiune în activitatea zilnică, care transformă cifrele în decizii concrete.",
       description: [
@@ -216,6 +224,7 @@ export const SERVICES: Service[] = [
     icon: 'users',
     fr: {
       slug: 'social',
+      price: 'Devis gratuit',
       title: 'Social',
       summary: "Un repère fiable pour vos obligations sociales et celles de vos employés, de l'embauche à la retraite.",
       description: [
@@ -237,6 +246,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'secretariat-social',
+      price: 'Ofertă gratuită',
       title: 'Consiliere socială',
       summary:
         "Un reper de încredere pentru obligațiile sociale ale dumneavoastră și ale angajaților, de la angajare până la pensie.",
@@ -264,6 +274,7 @@ export const SERVICES: Service[] = [
     icon: 'handshake',
     fr: {
       slug: 'accompagnement-de-la-personne',
+      price: 'Devis gratuit',
       title: 'Accompagnement de la personne',
       summary: "Un accompagnement personnalisé pour construire, au-delà de l'entreprise, votre avenir financier.",
       description: [
@@ -285,6 +296,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'consiliere-personala',
+      price: 'Ofertă gratuită',
       title: 'Consiliere personală',
       summary: "Un sprijin personalizat pentru a vă construi, dincolo de afacere, viitorul financiar.",
       description: [
@@ -311,6 +323,7 @@ export const SERVICES: Service[] = [
     icon: 'shield',
     fr: {
       slug: 'missions-speciales',
+      price: 'Devis gratuit',
       title: 'Missions spéciales',
       summary: "Une expertise comptable pointue pour vos dossiers les plus exigeants, audits et évaluations compris.",
       description: [
@@ -332,6 +345,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'misiuni-speciale',
+      price: 'Ofertă gratuită',
       title: 'Misiuni speciale',
       summary: "O expertiză contabilă avansată pentru dosarele dumneavoastră cele mai exigente, audituri și evaluări incluse.",
       description: [
@@ -358,6 +372,7 @@ export const SERVICES: Service[] = [
     icon: 'send',
     fr: {
       slug: 'facturation-electronique-peppol',
+      price: 'Devis gratuit',
       title: 'Facturation électronique Peppol',
       summary:
         "La facturation électronique via Peppol est obligatoire entre assujettis belges depuis le 1ᵉʳ janvier 2026 — nous vous mettons en conformité.",
@@ -380,6 +395,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'facturare-electronica-peppol',
+      price: 'Ofertă gratuită',
       title: 'Facturare electronică Peppol',
       summary:
         "Facturarea electronică prin Peppol este obligatorie între plătitori de TVA belgieni din 1 ianuarie 2026 — vă aducem la conformitate.",
@@ -407,6 +423,7 @@ export const SERVICES: Service[] = [
     icon: 'search-check',
     fr: {
       slug: 'controles-fiscaux',
+      price: 'Devis gratuit',
       title: 'Contrôles fiscaux',
       summary:
         "Une assistance déterminée avant, pendant et après un contrôle fiscal, pour défendre vos intérêts avec méthode.",
@@ -429,6 +446,7 @@ export const SERVICES: Service[] = [
     },
     ro: {
       slug: 'controale-fiscale',
+      price: 'Ofertă gratuită',
       title: 'Controale fiscale',
       summary:
         "O asistență fermă înainte, în timpul și după un control fiscal, pentru a vă apăra interesele cu metodă.",

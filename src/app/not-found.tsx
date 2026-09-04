@@ -1,16 +1,14 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
-import { HtmlShell } from '@/components/HtmlShell'
 import { SkipLink } from '@/components/SkipLink'
 import { DEFAULT_LOCALE } from '@/lib/i18n'
 import { NotFoundBody } from './_not-found/NotFoundBody'
-import './globals.css'
 
 /**
  * 404 du site, bilingue.
  *
- * Elle est rendue hors de `[locale]/layout.tsx` — c'est ce layout qui porte
- * `<html lang>` pour les vraies pages — donc elle fournit sa propre enveloppe.
+ * Elle est rendue dans le layout racine (app/layout.tsx), qui fournit
+ * `<html>`/`<body>` : elle n'apporte que l'en-tête, le corps et le pied.
  * La langue de l'URL étant par définition inconnue ici, elle affiche les
  * raccourcis FR et RO côte à côte plutôt qu'un simple retour à l'accueil.
  *
@@ -20,7 +18,7 @@ import './globals.css'
  */
 export default function NotFound() {
   return (
-    <HtmlShell lang={DEFAULT_LOCALE}>
+    <>
       {/* `not-found.tsx` n'accepte pas d'export `metadata` : React 19 remonte
           ces balises dans le <head>. Sans elles, l'onglet affiche l'URL brute. */}
       <title>Page introuvable · Pagină negăsită | TMF Compta</title>
@@ -31,6 +29,6 @@ export default function NotFound() {
         <NotFoundBody />
       </main>
       <Footer locale={DEFAULT_LOCALE} />
-    </HtmlShell>
+    </>
   )
 }

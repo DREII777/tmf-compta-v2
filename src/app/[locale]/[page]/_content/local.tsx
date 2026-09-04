@@ -225,7 +225,7 @@ export function LocalPage({ locale }: { locale: Locale }) {
             {AREA_SERVED.map((area) => (
               <li key={area}>
                 <Reveal className="h-full">
-                  <div className="flex h-full flex-col gap-1.5 rounded-lg border border-line bg-paper p-4">
+                  <div className="flex h-full flex-col gap-1.5 rounded-xl bg-paper p-4 shadow-card">
                     <span className="flex items-center gap-1.5 font-display text-base text-ink">
                       <Icon name="map-pin" size={14} className="shrink-0 text-brand" />
                       {area}
@@ -248,7 +248,7 @@ export function LocalPage({ locale }: { locale: Locale }) {
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {content.sectors.map((sector) => (
               <Reveal key={sector.title} className="h-full">
-                <article className="flex h-full flex-col gap-2.5 rounded-lg border border-line bg-paper p-6 shadow-xs">
+                <article className="flex h-full flex-col gap-2.5 rounded-xl bg-paper p-6 shadow-card">
                   <h3 className="font-display text-lg text-ink">{sector.title}</h3>
                   <p className="text-sm leading-relaxed text-ink-2">{sector.text}</p>
                 </article>

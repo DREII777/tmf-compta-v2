@@ -1,3 +1,4 @@
+import { Accent } from '../Accent'
 import { UI } from '@/content/ui'
 import type { Locale } from '@/lib/i18n'
 import { Container } from '../Container'
@@ -14,10 +15,10 @@ export function WhyUs({ locale }: WhyUsProps) {
   const ui = UI[locale].home
 
   return (
-    <section className="bg-soft py-16 md:py-24">
+    <section className="bg-paper py-16 md:py-24">
       <Container className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <Reveal>
-          <h2 className="font-display text-3xl wonk text-ink md:text-5xl">{ui.whyUsTitle}</h2>
+          <h2 className="font-display text-3xl wonk text-ink md:text-5xl"><Accent text={ui.whyUsTitle} /></h2>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-ink-2">{ui.whyUsIntro}</p>
 
           <ul className="mt-8 flex flex-col gap-4">

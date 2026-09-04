@@ -274,7 +274,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
             {COMMITMENTS[locale].map((item) => (
               <li key={item.title}>
                 <Reveal className="h-full">
-                  <article className="flex h-full gap-4 rounded-lg border border-line bg-paper p-6 shadow-xs">
+                  <article className="flex h-full gap-4 rounded-xl bg-paper p-6 shadow-card">
                     <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-tint text-brand">
                       <Icon name={item.icon} size={22} />
                     </span>
@@ -304,7 +304,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
                   <Reveal className="h-full">
                     <Link
                       href={servicePath(locale, content.slug)}
-                      className="group flex h-full items-center justify-between gap-3 rounded-lg border border-line bg-paper px-5 py-4 shadow-xs transition duration-200 ease-out-soft hover:border-line-2 hover:shadow-lg focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand"
+                      className="group flex h-full items-center justify-between gap-3 rounded-lg border border-line bg-paper px-5 py-4 shadow-xs transition duration-200 ease-out-soft hover:shadow-card-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand"
                     >
                       <span className="font-medium text-ink">{content.title}</span>
                       <span
@@ -321,7 +321,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
           </ul>
 
           <Reveal delay={120}>
-            <div className="mt-10 rounded-xl border border-line bg-soft p-6 md:p-8">
+            <div className="mt-10 rounded-xl bg-soft p-6 md:p-8">
               <h3 className="font-display text-lg text-ink">{AREA_TITLE[locale]}</h3>
               <p className="mt-3 max-w-prose leading-relaxed text-ink-2">{AREA_TEXT[locale]}</p>
               <Link
@@ -345,7 +345,7 @@ export function AboutPage({ locale }: { locale: Locale }) {
             {VALUES[locale].map((value) => (
               <li key={value.title}>
                 <Reveal className="h-full">
-                  <article className="flex h-full flex-col gap-3 rounded-lg border border-line bg-paper p-6 shadow-xs">
+                  <article className="flex h-full flex-col gap-3 rounded-xl bg-paper p-6 shadow-card">
                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-brand-tint text-brand">
                       <Icon name={value.icon} size={22} />
                     </span>

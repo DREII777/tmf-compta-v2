@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'ghost'
-type Size = 'sm' | 'md'
+type Variant = 'primary' | 'secondary' | 'soft' | 'ghost'
+type Size = 'sm' | 'md' | 'lg'
 
 interface BaseProps {
   variant?: Variant
@@ -20,16 +20,23 @@ type ElementButtonProps = BaseProps &
 export type ButtonProps = LinkButtonProps | ElementButtonProps
 
 const BASE =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded font-medium transition-colors duration-200 ease-out-soft focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50'
+  'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg font-semibold transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-out-soft focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand disabled:pointer-events-none disabled:opacity-50'
 
 const SIZES: Record<Size, string> = {
   sm: 'px-4 text-sm',
   md: 'px-6 text-base',
+  lg: 'min-h-13 px-7 text-[1.05rem]',
 }
 
+/**
+ * `soft` : fond menthe, texte encre — le bouton « doux » qui accompagne
+ * le navy sans lui faire concurrence (découvrir, en savoir plus…).
+ * `secondary` reste le bouton à filet, pour les contextes plus sobres.
+ */
 const VARIANTS: Record<Variant, string> = {
-  primary: 'bg-brand text-paper shadow-sm hover:bg-brand-2',
+  primary: 'bg-brand text-paper shadow-sm hover:-translate-y-0.5 hover:bg-brand-2 hover:shadow-lg',
   secondary: 'border border-line-2 bg-paper text-brand hover:border-brand hover:bg-brand-tint',
+  soft: 'bg-mint text-ink hover:bg-mint-2',
   ghost: 'text-brand hover:bg-soft',
 }
 

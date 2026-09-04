@@ -125,7 +125,7 @@ export function MethodStepper({ steps, labels }: MethodStepperProps) {
           id={`method-panel-${index}`}
           aria-labelledby={`method-tab-${index}`}
           hidden={index !== active}
-          className="mt-6 rounded-xl border border-line bg-soft p-6 md:p-8"
+          className="mt-6 rounded-xl bg-paper p-6 shadow-card md:p-8"
         >
           <p className="text-xs font-semibold uppercase tracking-wide text-ink-2">
             {labels.stepOf.replace('{n}', String(index + 1)).replace('{total}', String(steps.length))}

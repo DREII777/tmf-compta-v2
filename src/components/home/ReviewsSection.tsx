@@ -1,3 +1,4 @@
+import { Accent } from '../Accent'
 import type { Review } from '@/content/types'
 import { REVIEWS } from '@/content/reviews'
 import { UI } from '@/content/ui'
@@ -43,7 +44,7 @@ export function ReviewsSection({ locale }: ReviewsSectionProps) {
       <Container>
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl">
-            <h2 className="font-display text-3xl wonk text-ink md:text-5xl">{ui.reviewsTitle}</h2>
+            <h2 className="font-display text-3xl wonk text-ink md:text-5xl"><Accent text={ui.reviewsTitle} /></h2>
             <p className="mt-4 text-lg leading-relaxed text-ink-2">{ui.reviewsSubtitle}</p>
           </div>
 
@@ -51,7 +52,7 @@ export function ReviewsSection({ locale }: ReviewsSectionProps) {
             href={SITE.googleBusinessUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex shrink-0 items-center gap-3 rounded-lg border border-line bg-paper px-4 py-3 shadow-xs transition duration-200 ease-out-soft hover:border-line-2 hover:shadow-lg focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand"
+            className="flex shrink-0 items-center gap-3 rounded-xl bg-paper px-4 py-3 shadow-card transition duration-200 ease-out-soft hover:shadow-card-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand"
           >
             <div className="flex gap-0.5 text-accent" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, idx) => (

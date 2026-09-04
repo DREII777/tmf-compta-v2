@@ -1,5 +1,6 @@
-import Link from 'next/link'
+import { Accent } from './Accent'
 import type { ReactNode } from 'react'
+import { Button } from './Button'
 import { Container } from './Container'
 import { Reveal } from './Reveal'
 
@@ -15,10 +16,11 @@ interface CtaBandProps {
   className?: string
 }
 
-const ACTION_BASE =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded px-6 text-base font-medium transition-colors duration-200 ease-out-soft focus-visible:outline-paper'
-
-/** Bande CTA de fin de page — fond brand, texte clair. */
+/**
+ * Bande CTA de fin de page : un panneau teinté arrondi dans la largeur du
+ * site, texte à gauche, boutons à droite. Le navy reste réservé au bouton
+ * principal — la bande elle-même est claire, dans le ton du reste de la page.
+ */
 export function CtaBand({
   title,
   description,
@@ -30,13 +32,13 @@ export function CtaBand({
   className,
 }: CtaBandProps) {
   return (
-    <section className={`bg-brand py-16 md:py-20 ${className ?? ''}`}>
+    <section className={`bg-paper py-16 md:py-20 ${className ?? ''}`}>
       <Container>
         <Reveal>
-          <div className="flex flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col items-start gap-8 rounded-xl bg-brand-tint px-6 py-10 md:flex-row md:items-center md:justify-between md:px-12 md:py-12">
             <div className="max-w-xl">
-              <h2 className="balance font-display text-2xl wonk text-paper md:text-3xl">{title}</h2>
-              {description && <p className="mt-3 leading-relaxed text-paper/85">{description}</p>}
+              <h2 className="balance font-display text-2xl wonk text-ink md:text-3xl"><Accent text={title} /></h2>
+              {description && <p className="mt-3 leading-relaxed text-ink-2">{description}</p>}
             </div>
 
             {children ? (
@@ -44,21 +46,18 @@ export function CtaBand({
             ) : (
               <div className="flex flex-wrap gap-3">
                 {primaryLabel && primaryHref && (
-                  <Link href={primaryHref} className={`${ACTION_BASE} bg-paper text-brand hover:bg-brand-tint`}>
+                  <Button href={primaryHref} size="lg">
                     {primaryLabel}
-                  </Link>
+                  </Button>
                 )}
                 {secondaryLabel && secondaryHref && (
-                  <Link
-                    href={secondaryHref}
-                    className={`${ACTION_BASE} border border-paper/40 text-paper hover:bg-brand-2`}
-                  >
+                  <Button href={secondaryHref} variant="soft" size="lg">
                     {secondaryLabel}
-                  </Link>
+                  </Button>
                 )}
               </div>
             )}
-            </div>
+          </div>
         </Reveal>
       </Container>
     </section>

@@ -31,7 +31,7 @@ export function InteractiveMap({ locale }: { locale: Locale }) {
   const t = T[locale]
 
   return (
-    <div className="overflow-hidden rounded-xl border border-line bg-paper shadow-xs">
+    <div className="overflow-hidden rounded-xl bg-paper shadow-card">
       <iframe
         src={SITE.mapEmbedUrl}
         title={t.title}
